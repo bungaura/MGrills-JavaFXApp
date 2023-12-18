@@ -10,7 +10,7 @@ import java.sql.Statement;
 public final class Connect {
 	private final String USERNAME = "root";
 	private final String PASSWORD = "";
-	private final String DATABASE = "mysticgrills"; // Name of the database, subject to modification as needed
+	private final String DATABASE = "coba3"; // Name of the database, subject to modification as needed
 	private final String HOST = "localhost:3306";
 	private final String CONECTION = String.format("jdbc:mysql://%s/%s", HOST, DATABASE);
 
