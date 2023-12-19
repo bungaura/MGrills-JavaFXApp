@@ -28,7 +28,7 @@ public class WaiterOrderViewController {
     // Load orders into the table
 	public static void loadOrders() {
         orders.clear();
-        orders.addAll(OrderController.getAllPreparedOrderList());
+        orders.addAll(OrderController.getAllOrderList());
         table.setItems(orders);
         table.refresh();            
     }

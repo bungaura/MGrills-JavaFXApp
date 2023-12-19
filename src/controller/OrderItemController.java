@@ -16,9 +16,9 @@ public class OrderItemController {
 		OrderItem.updateOrderItem(orderItemId, menuItemId, quantity);
 	}
 	
-    // Deletes an order item with the specified order ID
-	public void deleteOrderItem(int orderId) {
-		OrderItem.deleteOrderItem(orderId);
+    // Deletes an order item with the specified order item ID
+	public static void deleteOrderItem(int orderItemId) {
+		OrderItem.deleteOrderItem(orderItemId);
 	}
 	
     // Retrieves a list of all order items associated with a specific order ID

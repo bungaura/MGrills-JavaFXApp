@@ -5,6 +5,7 @@ import controller.OrderItemController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
+import model.Order;
 import model.OrderItem;
 
 // A controller class managing the business logic in the chef order details view
@@ -19,7 +20,6 @@ public class ChefOrderDetailsController {
         this.orderId = orderId;
         this.table = table;
         orderitems = FXCollections.observableArrayList();
-        initialize();
     }
 
     // Initializes the controller and loads order items for the specified orderId
@@ -46,5 +46,22 @@ public class ChefOrderDetailsController {
             return "Wait for the order to be paid!";
         } 
         return "The order is already prepared!";
+    }
+
+    // Remove pending orders 
+    public String removeOrder() {
+        OrderItem selectedOrderItem = table.getSelectionModel().getSelectedItem();
+        int orderId = selectedOrderItem.getOrderId();
+        Order thisOrder = OrderController.getOrderByOrderId(orderId);
+        String orderStatus = thisOrder.getOrderStatus();
+        int orderItemId = selectedOrderItem.getOrderItemId();
+        
+        if (selectedOrderItem != null && orderStatus.equals("Pending")) {
+            OrderItemController.deleteOrderItem(orderItemId);
+            loadOrderItems(orderId);
+            return "Removed Order Item with ID: " + orderItemId;
+        } else {
+        	return "The order has been paid! Cannot be removed!";
+        }
     }
 }

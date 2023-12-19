@@ -20,7 +20,7 @@ public class WaiterOrderDetails extends Stage {
 	private VBox root;
     private static TableView<OrderItem> table;
     private Label orderIdLbl, dateLbl, orderTotalLbl, statusLbl, messageLbl;
-    private Button backBtn, serveOrderBtn;
+    private Button backBtn, serveOrderBtn, removeOrderBtn;
     private WaiterOrderDetailsController controller;
 
     // Initializes the Waiter Order Details View
@@ -44,8 +44,9 @@ public class WaiterOrderDetails extends Stage {
         messageLbl = new Label();
         backBtn = new Button("Cancel");
         serveOrderBtn = new Button("Serve Order");
+        removeOrderBtn = new Button("Remove Order");
 
-        HBox buttonBox = new HBox(backBtn, serveOrderBtn);
+        HBox buttonBox = new HBox(backBtn, serveOrderBtn, removeOrderBtn);
         buttonBox.setSpacing(10);
 
         root.getChildren().addAll(orderIdLbl, dateLbl, statusLbl, table, orderTotalLbl, messageLbl, buttonBox);
@@ -56,6 +57,12 @@ public class WaiterOrderDetails extends Stage {
         	String result = controller.serveOrder();
             messageLbl.setText(result);
             messageLbl.setStyle(result.contains("Served") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+        });
+        
+        removeOrderBtn.setOnAction(e -> {
+        	String result = controller.removeOrder();
+        	messageLbl.setText(result);
+            messageLbl.setStyle(result.contains("Removed") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
         });
     
         Scene scene = new Scene(root, 750, 550);

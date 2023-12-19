@@ -20,7 +20,7 @@ public class ChefOrderDetails extends Stage {
 	private VBox root;
     private static TableView<OrderItem> table;
     private Label orderIdLbl, dateLbl, orderTotalLbl, statusLbl, messageLbl;
-    private Button backBtn, prepareOrderBtn;
+    private Button backBtn, prepareOrderBtn, removeOrderBtn;
     private ChefOrderDetailsController controller;
 
     // Initialize the Chef Order Details view
@@ -44,8 +44,9 @@ public class ChefOrderDetails extends Stage {
         messageLbl = new Label();
         backBtn = new Button("Cancel");
         prepareOrderBtn = new Button("Prepare Order");
+        removeOrderBtn = new Button("Remove Order");
 
-        HBox buttonBox = new HBox(backBtn, prepareOrderBtn);
+        HBox buttonBox = new HBox(backBtn, prepareOrderBtn, removeOrderBtn);
         buttonBox.setSpacing(10);
 
         root.getChildren().addAll(orderIdLbl, dateLbl, statusLbl, table, orderTotalLbl, messageLbl, buttonBox);
@@ -56,6 +57,12 @@ public class ChefOrderDetails extends Stage {
         	String result = controller.prepareOrder();
             messageLbl.setText(result);
             messageLbl.setStyle(result.contains("Prepared") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+        });
+        
+        removeOrderBtn.setOnAction(e -> {
+        	String result = controller.removeOrder();
+        	messageLbl.setText(result);
+            messageLbl.setStyle(result.contains("Removed") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
         });
     
         Scene scene = new Scene(root, 750, 550);

@@ -60,6 +60,11 @@ public class OrderController {
 		return Order.getAllOrderList();
 	}
 	
+	// Retrieves a list of all allowed orders to be viewed by chef
+	public static ArrayList<Order> getAllChefOrderList() {
+		return Order.getAllChefOrderList();
+	}
+	
 	// Retrieves a list of all paid orders
 	public static ArrayList<Order> getAllPaidOrderList() {
 		return Order.getAllPaidOrderList();
