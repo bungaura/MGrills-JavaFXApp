@@ -390,4 +390,64 @@ public class Order {
 	    }
 	    return orders;
 	}
+	
+	// Retrieves all paid orders
+	public static ArrayList<Order> getAllPaidOrderList() {
+	    ArrayList<Order> orders = new ArrayList<>();
+
+		String query = "SELECT DISTINCT orders.orderId, users.userId, users.userName, "
+				+ "orders.orderStatus, orders.orderDate, orders.orderTotal "
+				+ "FROM orders JOIN orderitems ON orders.orderId = orderitems.orderId "
+				+ "JOIN users ON orders.orderUserId = users.userId "
+				+ "WHERE orders.orderStatus = 'Paid';";	    
+		
+		try (PreparedStatement ps = Connect.getConnection().prepareStatement(query)) {
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            int orderId = rs.getInt("orderId");
+	            int userId = rs.getInt("userId");
+	            String userName = rs.getString("userName");
+	            String status = rs.getString("orderStatus");
+	            String date = rs.getString("orderDate");
+	            Double total = rs.getDouble("orderTotal");
+
+	            Order order = new Order(orderId, userId, userName, status, date, total);
+
+	            orders.add(order);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return orders;
+	}
+	
+	// Retrieves all prepared orders
+	public static ArrayList<Order> getAllPreparedOrderList() {
+	    ArrayList<Order> orders = new ArrayList<>();
+
+		String query = "SELECT DISTINCT orders.orderId, users.userId, users.userName, "
+				+ "orders.orderStatus, orders.orderDate, orders.orderTotal "
+				+ "FROM orders JOIN orderitems ON orders.orderId = orderitems.orderId "
+				+ "JOIN users ON orders.orderUserId = users.userId "
+				+ "WHERE orders.orderStatus = 'Prepared';";	    
+		
+		try (PreparedStatement ps = Connect.getConnection().prepareStatement(query)) {
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            int orderId = rs.getInt("orderId");
+	            int userId = rs.getInt("userId");
+	            String userName = rs.getString("userName");
+	            String status = rs.getString("orderStatus");
+	            String date = rs.getString("orderDate");
+	            Double total = rs.getDouble("orderTotal");
+
+	            Order order = new Order(orderId, userId, userName, status, date, total);
+
+	            orders.add(order);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return orders;
+	}
 }

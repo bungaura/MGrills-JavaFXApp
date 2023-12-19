@@ -60,6 +60,16 @@ public class OrderController {
 		return Order.getAllOrderList();
 	}
 	
+	// Retrieves a list of all paid orders
+	public static ArrayList<Order> getAllPaidOrderList() {
+		return Order.getAllPaidOrderList();
+	}
+		
+	// Retrieves a list of all prepared orders
+	public static ArrayList<Order> getAllPreparedOrderList() {
+		return Order.getAllPreparedOrderList();
+	}
+	
     // Retrieves an order with the specified order ID
 	public static Order getOrderByOrderId(int orderId) {
 		return Order.getOrderByOrderId(orderId);

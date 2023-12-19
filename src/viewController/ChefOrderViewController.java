@@ -37,7 +37,7 @@ public class ChefOrderViewController {
     // Loads orders into the TableView from the controller and refreshes the TableView
 	public static void loadOrders() {
         orders.clear();
-        orders.addAll(OrderController.getAllOrderList());
+        orders.addAll(OrderController.getAllPaidOrderList());
         table.setItems(orders);
         table.refresh();            
     }
