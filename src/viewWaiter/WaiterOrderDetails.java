@@ -42,7 +42,7 @@ public class WaiterOrderDetails extends Stage {
                 
         orderTotalLbl = new Label("Total Order: " + OrderController.getOrderTotalByOrderId(orderId));
         messageLbl = new Label();
-        backBtn = new Button("Back");
+        backBtn = new Button("Cancel");
         serveOrderBtn = new Button("Serve Order");
 
         HBox buttonBox = new HBox(backBtn, serveOrderBtn);

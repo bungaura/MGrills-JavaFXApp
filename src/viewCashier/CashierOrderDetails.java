@@ -57,7 +57,7 @@ public class CashierOrderDetails extends Stage {
         
         messageLbl = new Label();
 
-        backBtn = new Button("Back");
+        backBtn = new Button("Cancel");
         processOrderBtn = new Button("Process Order");
         removeOrderBtn = new Button("Remove Order");
 

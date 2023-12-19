@@ -31,7 +31,7 @@ public class CustomerMenuViewController {
 	}
 
     // Loads menu items into the TableView
-	public void loadUsers() {
+	void loadUsers() {
 		items.clear();
 		items.addAll(MenuItem.getAllMenuItems());
 		table.setItems(items);
@@ -42,7 +42,7 @@ public class CustomerMenuViewController {
 	private void setupTableSelectionListener() {
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-            	new CustomerMenuDetails(currentUser, currentOrder, null, null).initialize(
+            	new CustomerMenuDetails(currentUser, currentOrder).initialize(
             			newSelection.getMenuItemId(),
             			newSelection.getMenuItemName(), 
             			newSelection.getMenuItemDescription(), 

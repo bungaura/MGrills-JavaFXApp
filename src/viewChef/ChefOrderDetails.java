@@ -42,7 +42,7 @@ public class ChefOrderDetails extends Stage {
                 
         orderTotalLbl = new Label("Total Order: " + OrderController.getOrderTotalByOrderId(orderId));
         messageLbl = new Label();
-        backBtn = new Button("Back");
+        backBtn = new Button("Cancel");
         prepareOrderBtn = new Button("Prepare Order");
 
         HBox buttonBox = new HBox(backBtn, prepareOrderBtn);
