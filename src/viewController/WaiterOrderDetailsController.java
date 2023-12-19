@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import model.Order;
 import model.OrderItem;
+import viewWaiter.WaiterOrderMenuView;
+import viewWaiter.WaiterOrderUpdate;
 
 //A view controller class for managing the business logic to the UI
 //WaiterOrderDetailsController handles the details and actions for serving orders in the waiter's order details view
@@ -24,10 +26,24 @@ public class WaiterOrderDetailsController {
 
     // Initializes the controller and load order items for the specified orderId
     public void initialize() {
+    	setupTableSelectionListener();
         loadOrderItems(orderId);
     }
+    
+    // Set up table selection listener and pass the order data to another window
+    private void setupTableSelectionListener() {
+		table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        		new WaiterOrderUpdate().initialize(
+        				newSelection.getOrderId(),
+                		newSelection.getOrderItemId(),
+                		newSelection.getMenuItemId(), 
+                		newSelection.getMenuItemName(),
+                		newSelection.getQuantity()); 
+            }
+        );
+	}
 
-    // Lload order items for the specified orderId into the TableView
+    // Load order items for the specified orderId into the TableView
     private void loadOrderItems(int orderId) {
         orderitems.clear();
         orderitems.addAll(OrderItemController.getAllOrderItemsByOrderId(orderId));
@@ -50,21 +66,16 @@ public class WaiterOrderDetailsController {
         return "The order is already served!";
     }
 
-    // Remove pending orders 
-	public String removeOrder() {
-        OrderItem selectedOrderItem = table.getSelectionModel().getSelectedItem();
-        int orderId = selectedOrderItem.getOrderId();
-        Order thisOrder = OrderController.getOrderByOrderId(orderId);
+    // Update customer order by adding new order item
+    public String addNewOrderItem() {
+		Order thisOrder = OrderController.getOrderByOrderId(orderId);
         String orderStatus = thisOrder.getOrderStatus();
-        int orderItemId = selectedOrderItem.getOrderItemId();
-        
-        if (selectedOrderItem != null && orderStatus.equals("Pending")) {
-            OrderItemController.deleteOrderItem(orderItemId);
-            loadOrderItems(orderId);
-            return "Removed Order Item with ID: " + orderItemId;
-        } else {
-        	return "The order has been paid! Cannot be removed!";
-        }
-    }
+		if (orderStatus.equals("Pending")) {
+        	new WaiterOrderMenuView().initialize(orderId);
+        	return "";
+		} else {
+			return "Cannot add order! This order has been paid!";
+		}
+	}
 
 }

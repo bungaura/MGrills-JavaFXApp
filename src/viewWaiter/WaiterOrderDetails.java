@@ -20,7 +20,7 @@ public class WaiterOrderDetails extends Stage {
 	private VBox root;
     private static TableView<OrderItem> table;
     private Label orderIdLbl, dateLbl, orderTotalLbl, statusLbl, messageLbl;
-    private Button backBtn, serveOrderBtn, removeOrderBtn;
+    private Button backBtn, serveOrderBtn, addBtn;
     private WaiterOrderDetailsController controller;
 
     // Initializes the Waiter Order Details View
@@ -44,9 +44,9 @@ public class WaiterOrderDetails extends Stage {
         messageLbl = new Label();
         backBtn = new Button("Cancel");
         serveOrderBtn = new Button("Serve Order");
-        removeOrderBtn = new Button("Remove Order");
+        addBtn = new Button("Add Order Item");
 
-        HBox buttonBox = new HBox(backBtn, serveOrderBtn, removeOrderBtn);
+        HBox buttonBox = new HBox(backBtn, serveOrderBtn, addBtn);
         buttonBox.setSpacing(10);
 
         root.getChildren().addAll(orderIdLbl, dateLbl, statusLbl, table, orderTotalLbl, messageLbl, buttonBox);
@@ -59,10 +59,10 @@ public class WaiterOrderDetails extends Stage {
             messageLbl.setStyle(result.contains("Served") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
         });
         
-        removeOrderBtn.setOnAction(e -> {
-        	String result = controller.removeOrder();
+        addBtn.setOnAction(e -> {
+        	String result = controller.addNewOrderItem();
         	messageLbl.setText(result);
-            messageLbl.setStyle(result.contains("Removed") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
+            messageLbl.setStyle(result.contains("Cannot") ? "-fx-text-fill: red;" : "-fx-text-fill: green;");
         });
     
         Scene scene = new Scene(root, 750, 550);
