@@ -19,7 +19,11 @@ public class ChefOrderDetails extends Stage {
 	private VBox root;
     private static TableView<OrderItem> table;
     private Label orderIdLbl, dateLbl, orderTotalLbl, statusLbl, messageLbl;
+<<<<<<< Updated upstream
     private Button backBtn, prepareOrderBtn;
+=======
+    private Button backBtn, prepareOrderBtn, addBtn;
+>>>>>>> Stashed changes
     private ChefOrderDetailsController controller;
 
     public void initialize(int orderId) {
@@ -42,8 +46,14 @@ public class ChefOrderDetails extends Stage {
         messageLbl = new Label();
         backBtn = new Button("Back");
         prepareOrderBtn = new Button("Prepare Order");
+<<<<<<< Updated upstream
 
         HBox buttonBox = new HBox(backBtn, prepareOrderBtn);
+=======
+        addBtn = new Button("Add Order Item");
+        
+        HBox buttonBox = new HBox(backBtn, prepareOrderBtn, addBtn);
+>>>>>>> Stashed changes
         buttonBox.setSpacing(10);
 
         root.getChildren().addAll(orderIdLbl, dateLbl, statusLbl, table, orderTotalLbl, messageLbl, buttonBox);
@@ -55,6 +65,15 @@ public class ChefOrderDetails extends Stage {
             messageLbl.setText(result);
             messageLbl.setStyle(result.contains("Prepared") ? "-fx-text-fill: green;" : "-fx-text-fill: red;");
         });
+<<<<<<< Updated upstream
+=======
+        
+        addBtn.setOnAction(e -> {
+        	String result = controller.addNewOrderItem();
+        	messageLbl.setText(result);
+            messageLbl.setStyle(result.contains("Cannot") ? "-fx-text-fill: red;" : "-fx-text-fill: green;");
+        });
+>>>>>>> Stashed changes
     
         Scene scene = new Scene(root, 750, 550);
         setScene(scene);

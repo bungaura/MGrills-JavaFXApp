@@ -7,6 +7,11 @@ import javafx.scene.control.TableView;
 import model.Order;
 import viewChef.ChefOrderDetails;
 
+<<<<<<< Updated upstream
+=======
+//A view controller class for managing the business logic to the UI
+//ChefOrderViewController handles the chef order data and table view in the chef dashboard
+>>>>>>> Stashed changes
 public class ChefOrderViewController {
 	private static ObservableList<Order> orders;
     private static TableView<Order> table;
@@ -29,6 +34,10 @@ public class ChefOrderViewController {
         });
     }
 	
+<<<<<<< Updated upstream
+=======
+    // Loads orders into the table from the controller and refreshes the TableView
+>>>>>>> Stashed changes
 	public static void loadOrders() {
         orders.clear();
         orders.addAll(OrderController.getAllOrderList());

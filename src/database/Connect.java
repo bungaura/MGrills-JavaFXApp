@@ -11,7 +11,11 @@ public final class Connect {
 
 	private final String USERNAME = "root";
 	private final String PASSWORD = "";
+<<<<<<< Updated upstream
 	private final String DATABASE = "coba3";
+=======
+	private final String DATABASE = "mysticgrills"; // Name of the database, subject to modification as needed
+>>>>>>> Stashed changes
 	private final String HOST = "localhost:3306";
 	private final String CONECTION = String.format("jdbc:mysql://%s/%s", HOST, DATABASE);
 

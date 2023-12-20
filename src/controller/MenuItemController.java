@@ -46,6 +46,9 @@ public class MenuItemController {
 		if(price < 2.5) {
 			return "Price must be equal to or greater than 2.5!";
 		}
+		if(desc.length() < 10) {
+			return "Description must be more than 10 characters";
+		}
 		return null;
 	}
 

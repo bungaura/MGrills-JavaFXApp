@@ -6,6 +6,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import model.OrderItem;
+import viewChef.ChefOrderMenuView;
+import viewChef.ChefOrderUpdate;
 
 public class ChefOrderDetailsController {
     private int orderId;
@@ -20,8 +22,22 @@ public class ChefOrderDetailsController {
     }
 
     public void initialize() {
+    	setupTableSelectionListener();
         loadOrderItems(orderId);
     }
+    
+    // Set up table selection listener and pass the order data to another window
+    private void setupTableSelectionListener() {
+		table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        		new ChefOrderUpdate().initialize(
+        				newSelection.getOrderId(),
+                		newSelection.getOrderItemId(),
+                		newSelection.getMenuItemId(), 
+                		newSelection.getMenuItemName(),
+                		newSelection.getQuantity()); 
+            }
+        );
+	}
 
     private void loadOrderItems(int orderId) {
         orderitems.clear();
@@ -41,4 +57,19 @@ public class ChefOrderDetailsController {
         } 
         return "The order is already prepared!";
     }
+<<<<<<< Updated upstream
+=======
+
+    // Update customer order by adding new order item
+    public String addNewOrderItem() {
+		Order thisOrder = OrderController.getOrderByOrderId(orderId);
+        String orderStatus = thisOrder.getOrderStatus();
+		if (orderStatus.equals("Pending")) {
+        	new ChefOrderMenuView().initialize(orderId);
+        	return "";
+		} else {
+			return "Cannot add order! This order has been paid!";
+		}
+	}
+>>>>>>> Stashed changes
 }
